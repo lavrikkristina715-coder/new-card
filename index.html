@@ -3,29 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abramova Brow | Бьюти-мастер Ася</title>
+    <title>Asya | Beauty Master</title>
     <style>
         :root {
-            /* Нежная пастельная палитра */
-            --bg-start: #fbf5f3; /* Цвет взбитых сливок */
-            --bg-end: #ebdcd7;   /* Цвет пыльной розы */
-            --card-bg: rgba(255, 255, 255, 0.75); /* Полупрозрачный глянец */
-            --accent-color: #bfa399; /* Благородный кофейно-пастельный */
-            --text-main: #3a3230;
-            --text-muted: #7d706c;
-            --border-radius: 24px;
+            --text-main: #2c2523;
+            --text-muted: #6b5e5a;
+            --gold-light: #fff3d1;
+            --gold-main: #dfba6b;
+            --gold-dark: #8a6f3e;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Times New Roman', Times, serif, sans-serif;
             -webkit-list-style: none;
         }
 
         body {
-            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            background-color: #0b0f09;
             color: var(--text-main);
             display: flex;
             justify-content: center;
@@ -34,10 +31,12 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
+            /* Задний фон: темная листва и глубокие тени */
+            background-image: radial-gradient(circle at 50% 50%, #161f12 0%, #060905 100%);
         }
 
-        /* Задний фон: Анимация дыма и золотых частиц */
-        .background-effects {
+        /* Сложная анимация живого дыма на заднем фоне */
+        .smoke-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -45,74 +44,65 @@
             height: 100%;
             z-index: 1;
             pointer-events: none;
+            opacity: 0.35;
         }
 
-        /* Слои дыма */
-        .smoke {
+        .smoke-cloud {
             position: absolute;
-            bottom: -50px;
+            bottom: -100px;
             left: 50%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 70%);
-            transform: translateX(-50%);
-            opacity: 0;
-            filter: blur(40px);
-            animation: riseSmoke 9s infinite linear;
-        }
-        .smoke2 {
-            animation-delay: 3s;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(240,220,215,0.7) 0%, rgba(240,220,215,0) 70%);
-        }
-        .smoke3 {
-            animation-delay: 6s;
             width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(235,230,220,0.6) 0%, rgba(235,230,220,0) 70%);
+            transform: translateX(-50%);
+            filter: blur(50px);
+            animation: riseSmoke 12s infinite linear;
+        }
+        .sc2 { animation-delay: 4s; width: 600px; height: 600px; }
+        .sc3 { animation-delay: 8s; width: 800px; }
+
+        /* Мерцающие золотые искры */
+        .sparkle {
+            position: absolute;
+            background: radial-gradient(circle, var(--gold-light) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: driftSparkles 8s infinite linear;
         }
 
-        /* Магические кружащиеся частицы */
-        .particle {
-            position: absolute;
-            bottom: -10px;
-            background: radial-gradient(circle, #f3e1d3 0%, rgba(255,215,0,0) 80%);
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: riseParticles 7s infinite linear;
+        /* Контейнер-карточка (Матовое стекло теплого оттенка из референса) */
+        .card-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 410px;
+            padding: 4px; /* Отступ для золотой рамки */
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark));
+            /* Мигание и перелив золотой рамки */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 40px rgba(223, 186, 107, 0.2);
+            animation: goldGlow 4s ease-in-out infinite alternate;
         }
 
         .container {
             width: 100%;
-            max-width: 420px;
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            backdrop-filter: blur(20px); /* Эффект матового стекла */
-            box-shadow: 0 15px 35px rgba(163, 140, 133, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-            padding: 35px 25px;
+            background: linear-gradient(180deg, rgba(254, 252, 247, 0.93) 0%, rgba(247, 241, 230, 0.96) 100%);
+            border-radius: 26px;
+            padding: 40px 24px;
             text-align: center;
-            z-index: 2;
-            position: relative;
+            backdrop-filter: blur(10px);
         }
 
-        .logo-text {
-            font-size: 19px;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            color: var(--text-main);
-            font-weight: 300;
-            border-bottom: 1px solid rgba(181, 159, 152, 0.2);
-            padding-bottom: 15px;
-        }
-
-        /* Мягкое покачивание фото */
+        /* Фотография в тонкой золотой рамке */
         .avatar-container {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 20px;
             position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 25px;
-            animation: float 4s ease-in-out infinite;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+            border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(138, 111, 62, 0.2);
         }
 
         .avatar {
@@ -120,34 +110,42 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #ffffff;
-            box-shadow: 0 8px 25px rgba(181, 159, 152, 0.3);
+            display: block;
         }
 
         .name {
-            font-size: 25px;
-            font-weight: 500;
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
+            font-size: 34px;
+            font-weight: 400;
+            margin-bottom: 4px;
+            letter-spacing: 1px;
+            color: #1a1514;
         }
 
         .sub-title {
-            font-size: 12px;
-            color: var(--accent-color);
+            font-size: 11px;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 35px;
-            font-weight: 600;
+            letter-spacing: 5px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .heart-divider {
+            color: var(--gold-dark);
+            font-size: 10px;
+            margin-bottom: 30px;
+            opacity: 0.8;
         }
 
         .services-title {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             color: var(--text-muted);
             margin-bottom: 15px;
             text-align: left;
             padding-left: 5px;
+            font-weight: bold;
         }
 
         .services-list {
@@ -156,148 +154,143 @@
             margin: 0 0 35px 0;
         }
 
+        /* Пункты меню — утонченные плашки */
         .services-list li {
             list-style: none !important;
-            background: rgba(255, 255, 255, 0.6);
-            padding: 15px 18px;
-            border-radius: 14px;
-            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 16px 18px;
+            border-radius: 16px;
+            margin-bottom: 12px;
             font-size: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-left: 3px solid var(--accent-color);
+            border: 1px solid rgba(235, 225, 210, 0.6);
             display: flex;
             align-items: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             text-align: left;
-            color: #4a403d;
+            color: var(--text-main);
+            box-shadow: 0 4px 10px rgba(138, 111, 62, 0.03);
         }
 
         .services-list li:hover {
-            transform: translateX(6px);
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 5px 15px rgba(181, 159, 152, 0.1);
+            transform: translateY(-2px);
+            background: #ffffff;
+            box-shadow: 0 6px 15px rgba(223, 186, 107, 0.15);
+            border-color: var(--gold-main);
         }
 
         .services-list li span {
             margin-right: 12px;
-            color: var(--accent-color);
-            font-size: 15px;
+            color: var(--gold-dark);
+            font-size: 12px;
         }
 
+        /* Кнопки контактов, адаптированные под премиум-стиль */
         .buttons-container {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px;
+            padding: 15px;
             border-radius: 14px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: 0.5px;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
         }
 
         .btn-tg {
-            background-color: #54a9d6;
+            background-color: #4b8ca3;
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(84, 169, 214, 0.2);
         }
-        .btn-tg:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(84, 169, 214, 0.35);
-        }
+        .btn-tg:hover { background-color: #3b7387; transform: scale(1.02); }
 
         .btn-wa {
-            background-color: #5cc884;
+            background-color: #559c6b;
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(92, 200, 132, 0.2);
         }
-        .btn-wa:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(92, 200, 132, 0.35);
-        }
+        .btn-wa:hover { background-color: #438056; transform: scale(1.02); }
 
         .btn-phone {
             background-color: transparent;
-            color: #7d706c;
-            border: 1.5px solid #b59f98;
-            box-shadow: 0 4px 10px rgba(181, 159, 152, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--gold-dark);
         }
         .btn-phone:hover {
-            background-color: #b59f98;
+            background-color: var(--gold-dark);
             color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(181, 159, 152, 0.3);
+            transform: scale(1.02);
         }
 
         .btn svg {
-            width: 20px;
-            height: 20px;
-            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
             fill: currentColor;
         }
 
-        /* Новые анимации эффектов */
+        /* --- Анимации --- */
         @keyframes riseSmoke {
-            0% { transform: translate(-50%, 0) scale(0.8); opacity: 0; }
-            15% { opacity: 0.4; }
-            50% { opacity: 0.2; }
-            100% { transform: translate(-50%, -600px) scale(1.5); opacity: 0; }
+            0% { transform: translate(-50%, 0) scale(0.7) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.5; }
+            60% { opacity: 0.3; }
+            100% { transform: translate(-50%, -700px) scale(1.6) rotate(20deg); opacity: 0; }
         }
 
-        @keyframes riseParticles {
-            0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.3; }
-            100% { transform: translateY(-100vh) translateX(50px) scale(1.2); opacity: 0; }
+        @keyframes driftSparkles {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            30% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) translateX(30px) scale(1.3); opacity: 0; }
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0px); }
+        /* Пульсирующее нежное свечение золотых граней */
+        @keyframes goldGlow {
+            0% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(223, 186, 107, 0.2); }
+            100% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 45px rgba(255, 243, 209, 0.5); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Эффекты заднего фона -->
-    <div class="background-effects">
-        <div class="smoke"></div>
-        <div class="smoke smoke2"></div>
-        <div class="smoke smoke3"></div>
-        <!-- Крупицы -->
-        <div class="particle" style="left: 10%; width: 6px; height: 6px; animation-duration: 6s;"></div>
-        <div class="particle" style="left: 30%; width: 4px; height: 4px; animation-duration: 8s; animation-delay: 2s;"></div>
-        <div class="particle" style="left: 55%; width: 8px; height: 8px; animation-duration: 7s; animation-delay: 1s;"></div>
-        <div class="particle" style="left: 80%; width: 5px; height: 5px; animation-duration: 9s; animation-delay: 3s;"></div>
+    <!-- Эффекты заднего плана -->
+    <div class="smoke-bg">
+        <div class="smoke-cloud"></div>
+        <div class="smoke-cloud sc2"></div>
+        <div class="smoke-cloud sc3"></div>
+        <!-- Золотые крупицы света -->
+        <div class="sparkle" style="left: 15%; width: 5px; height: 5px; animation-duration: 7s;"></div>
+        <div class="sparkle" style="left: 45%; width: 3px; height: 3px; animation-duration: 10s; animation-delay: 2s;"></div>
+        <div class="sparkle" style="left: 75%; width: 6px; height: 6px; animation-duration: 8s; animation-delay: 4s;"></div>
     </div>
 
-    <div class="container">
-        <div class="logo-text">ABRAMOVA BROW</div>
+    <!-- Внешняя переливающаяся золотая рамка -->
+    <div class="card-wrapper">
+        <div class="container">
+            
+            <div class="avatar-container">
+                <img src="avatar.jpg" alt="Asya" class="avatar">
+            </div>
 
-        <div class="avatar-container">
-            <img src="avatar.jpg" alt="Ася" class="avatar">
-        </div>
+            <div class="name">Asya</div>
+            <div class="sub-title">Beauty Master</div>
+            <div class="heart-divider">♥</div>
 
-        <div class="name">Ася</div>
-        <div class="sub-title">Бьюти Мастер</div>
+            <div class="services-title">Услуги:</div>
+            <ul class="services-list">
+                <li><span>✦</span> 1. Коррекция и окрашивание бровей</li>
+                <li><span>✦</span> 2. Ламинирование ресниц и бровей</li>
+                <li><span>✦</span> 3. Шугаринг тела и лица</li>
+                <li><span>✦</span> 4. Плетение кос / Канекалон</li>
+                <li><span>✦</span> 5. Макияж дневной / Вечерний</li>
+                <li><span>✦</span> 6. Сам себе визажист / Обучение</li>
+            </ul>
 
-        <div class="services-title">Услуги:</div>
-        <ul class="services-list">
-            <li><span>✦</span> 1. Коррекция и окрашивание бровей</li>
-            <li><span>✦</span> 2. Ламинирование ресниц и бровей</li>
-            <li><span>✦</span> 3. Шугаринг тела и лица</li>
-            <li><span>✦</span> 4. Плетение кос / Канекалон</li>
-            <li><span>✦</span> 5. Макияж дневной / Вечерний</li>
-            <li><span>✦</span> 6. Сам себе визажист / Обучение</li>
-        </ul>
-
-        <div class="buttons-container">
-            <a href="https://t.me" target="_blank" class="btn btn-tg">
+            <div class="buttons-container">
+                <!-- Telegram -->
+                <a href="https://t.me" target="_blank" class="btn btn-tg">
