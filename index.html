@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asya | Beauty Master</title>
+<title>Aysel | Beauty Master</title>
 <style>
     :root {
         --text-main: #2c2523;
@@ -33,31 +33,31 @@
         background-image: radial-gradient(circle at 50% 30%, #111a0d 0%, #030502 80%);
     }
 
-    /* Усиленная яркая подсветка сверху */
     .top-light-effect {
         position: absolute;
-        top: -180px;
+        top: -220px;
         left: 50%;
         transform: translateX(-50%);
-        width: 700px;
-        height: 480px;
-        background: radial-gradient(circle, rgba(255, 246, 218, 0.65) 0%, rgba(223, 186, 107, 0.28) 45%, rgba(0,0,0,0) 72%);
+        width: 800px;
+        height: 550px;
+        background: radial-gradient(circle, rgba(255, 246, 218, 0.75) 0%, rgba(223, 186, 107, 0.35) 45%, rgba(0,0,0,0) 75%);
         z-index: 1;
         pointer-events: none;
-        animation: lightPulse 5s ease-in-out infinite alternate;
-        filter: blur(2px);
+        filter: blur(1px);
+        animation: lightPulse 4s ease-in-out infinite alternate;
     }
 
     .top-light-effect::after {
         content: "";
         position: absolute;
-        top: 60px;
+        top: 90px;
         left: 50%;
         transform: translateX(-50%);
-        width: 380px;
-        height: 260px;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 246, 218, 0.2) 60%, rgba(0,0,0,0) 80%);
+        width: 420px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 246, 218, 0.25) 60%, rgba(0,0,0,0) 80%);
         border-radius: 50%;
+        animation: lightPulse 3s ease-in-out infinite alternate-reverse;
     }
 
     .card-wrapper {
@@ -129,8 +129,17 @@
         font-size: 10px;
         color: var(--text-muted);
         letter-spacing: 2px;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
         opacity: 0.75;
+    }
+
+    .quote {
+        font-style: italic;
+        font-size: 12px;
+        color: var(--gold-dark);
+        letter-spacing: 0.5px;
+        margin: 6px 0 18px 0;
+        opacity: 0.85;
     }
 
     .twig-divider {
@@ -194,7 +203,6 @@
         font-size: 13px;
     }
 
-    /* Кнопка "Записаться" — акцентная, золотая */
     .btn-book {
         display: flex;
         align-items: center;
@@ -217,6 +225,13 @@
 
     .btn-book:hover {
         transform: scale(1.02);
+    }
+
+    .gold-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gold-main), transparent);
+        margin: 24px 0;
+        opacity: 0.6;
     }
 
     .buttons-container {
@@ -281,6 +296,15 @@
         fill: currentColor;
     }
 
+    .footer-tag {
+        text-align: center;
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: var(--gold-dark);
+        margin-top: 20px;
+        opacity: 0.7;
+    }
+
     @keyframes borderGleam {
         0% { background-position: 0% 50%; }
         100% { background-position: 400% 50%; }
@@ -297,8 +321,8 @@
     }
 
     @keyframes lightPulse {
-        0% { opacity: 0.85; height: 480px; }
-        100% { opacity: 1; height: 520px; }
+        0% { opacity: 0.8; }
+        100% { opacity: 1; }
     }
 </style>
 </head>
@@ -310,12 +334,13 @@
     <div class="container">
 
         <div class="avatar-container">
-            <img src="avatar.jpg" alt="Asya" class="avatar">
+            <img src="avatar.jpg" alt="Aysel" class="avatar">
         </div>
 
-        <div class="name">Asya</div>
+        <div class="name">Aysel</div>
         <div class="sub-title">Beauty Master</div>
         <div class="location">Индивидуальный приём</div>
+        <div class="quote">«Красота — это внимание к деталям»</div>
 
         <div class="twig-divider">
             <svg viewBox="0 0 100 30">
@@ -337,6 +362,8 @@
             <li><span>✦</span> 6. Сам себе визажист / Обучение</li>
         </ul>
 
+        <div class="gold-divider"></div>
+
         <div class="buttons-container">
             <a href="https://t.me/Abramova_Aysel" target="_blank" class="btn btn-tg">
                 <svg viewBox="0 0 24 24"><path d="M9.036 15.803 8.72 20.09c.46 0 .658-.198.897-.436l2.15-2.06 4.458 3.26c.818.452 1.4.214 1.61-.756l2.918-13.7c.293-1.226-.443-1.71-1.24-1.41L3.31 9.86c-1.19.463-1.17 1.13-.203 1.43l4.53 1.415L18.34 6.15c.474-.31.907-.14.55.17"/></svg>
@@ -353,6 +380,8 @@
                 Позвонить
             </a>
         </div>
+
+        <div class="footer-tag">AYSEL BEAUTY STUDIO</div>
 
     </div>
 </div>
