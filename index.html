@@ -8,7 +8,7 @@
         :root {
             --text-main: #2c2523;
             --text-muted: #6b5e5a;
-            --gold-light: #fff3d1;
+            --gold-light: #fff5d6;
             --gold-main: #dfba6b;
             --gold-dark: #8a6f3e;
         }
@@ -18,7 +18,6 @@
             margin: 0;
             padding: 0;
             font-family: 'Times New Roman', Times, serif, sans-serif;
-            -webkit-list-style: none;
         }
 
         body {
@@ -30,13 +29,15 @@
             min-height: 100vh;
             padding: 20px;
             position: relative;
-            overflow-x: hidden;
-            /* Задний фон: темная листва и глубокие тени */
-            background-image: radial-gradient(circle at 50% 50%, #161f12 0%, #060905 100%);
+            overflow: hidden;
+            /* Живой переливающийся премиум-фон */
+            background: linear-gradient(135deg, #070d05 0%, #142010 50%, #050804 100%);
+            background-size: 400% 400%;
+            animation: gradientBg 12s ease infinite;
         }
 
-        /* Сложная анимация живого дыма на заднем фоне */
-        .smoke-bg {
+        /* Золотые мерцающие частицы на фоне */
+        .sparks-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -44,65 +45,49 @@
             height: 100%;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.35;
         }
 
-        .smoke-cloud {
+        .spark {
             position: absolute;
-            bottom: -100px;
-            left: 50%;
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(235,230,220,0.6) 0%, rgba(235,230,220,0) 70%);
-            transform: translateX(-50%);
-            filter: blur(50px);
-            animation: riseSmoke 12s infinite linear;
-        }
-        .sc2 { animation-delay: 4s; width: 600px; height: 600px; }
-        .sc3 { animation-delay: 8s; width: 800px; }
-
-        /* Мерцающие золотые искры */
-        .sparkle {
-            position: absolute;
-            background: radial-gradient(circle, var(--gold-light) 0%, rgba(255,255,255,0) 70%);
+            bottom: -20px;
+            background: radial-gradient(circle, var(--gold-light) 0%, rgba(223,186,107,0) 70%);
             border-radius: 50%;
-            opacity: 0.7;
-            animation: driftSparkles 8s infinite linear;
+            opacity: 0.6;
+            animation: riseUp 8s infinite linear;
         }
 
-        /* Контейнер-карточка (Матовое стекло теплого оттенка из референса) */
+        /* Карточка с эффектом переливающегося золотого свечения */
         .card-wrapper {
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 410px;
-            padding: 4px; /* Отступ для золотой рамки */
+            max-width: 400px;
+            padding: 3px; 
             border-radius: 30px;
-            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark));
-            /* Мигание и перелив золотой рамки */
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 40px rgba(223, 186, 107, 0.2);
-            animation: goldGlow 4s ease-in-out infinite alternate;
+            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark), var(--gold-light), var(--gold-main));
+            background-size: 300% 300%;
+            animation: borderMove 4s linear infinite, cardGlow 3s ease-in-out infinite alternate;
         }
 
         .container {
             width: 100%;
-            background: linear-gradient(180deg, rgba(254, 252, 247, 0.93) 0%, rgba(247, 241, 230, 0.96) 100%);
-            border-radius: 26px;
-            padding: 40px 24px;
+            background: linear-gradient(180deg, #fefcf7 0%, #f7f1e6 100%);
+            border-radius: 27px;
+            padding: 35px 20px;
             text-align: center;
-            backdrop-filter: blur(10px);
+            box-shadow: inset 0 0 15px rgba(223, 186, 107, 0.1);
         }
 
-        /* Фотография в тонкой золотой рамке */
+        /* Фото в золотом ореоле */
         .avatar-container {
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 20px;
+            width: 125px;
+            height: 125px;
+            margin: 0 auto 15px;
             position: relative;
             padding: 3px;
             background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
             border-radius: 50%;
-            box-shadow: 0 8px 20px rgba(138, 111, 62, 0.2);
+            box-shadow: 0 8px 20px rgba(138, 111, 62, 0.25);
         }
 
         .avatar {
@@ -114,9 +99,9 @@
         }
 
         .name {
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 400;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             letter-spacing: 1px;
             color: #1a1514;
         }
@@ -126,65 +111,60 @@
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 5px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: bold;
         }
 
         .heart-divider {
             color: var(--gold-dark);
             font-size: 10px;
-            margin-bottom: 30px;
-            opacity: 0.8;
+            margin-bottom: 25px;
+            opacity: 0.7;
         }
 
         .services-title {
             font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: var(--text-muted);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             text-align: left;
             padding-left: 5px;
             font-weight: bold;
         }
 
         .services-list {
-            list-style: none !important;
+            list-style: none;
             padding: 0;
-            margin: 0 0 35px 0;
+            margin: 0 0 30px 0;
         }
 
-        /* Пункты меню — утонченные плашки */
         .services-list li {
-            list-style: none !important;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 16px 18px;
-            border-radius: 16px;
-            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 14px 16px;
+            border-radius: 14px;
+            margin-bottom: 10px;
             font-size: 14px;
-            border: 1px solid rgba(235, 225, 210, 0.6);
+            border: 1px solid rgba(223, 186, 107, 0.2);
             display: flex;
             align-items: center;
-            transition: all 0.4s ease;
             text-align: left;
             color: var(--text-main);
-            box-shadow: 0 4px 10px rgba(138, 111, 62, 0.03);
+            transition: transform 0.3s ease;
         }
 
         .services-list li:hover {
-            transform: translateY(-2px);
-            background: #ffffff;
-            box-shadow: 0 6px 15px rgba(223, 186, 107, 0.15);
+            transform: translateX(4px);
             border-color: var(--gold-main);
         }
 
         .services-list li span {
-            margin-right: 12px;
+            margin-right: 10px;
             color: var(--gold-dark);
-            font-size: 12px;
+            font-size: 11px;
         }
 
-        /* Кнопки контактов, адаптированные под премиум-стиль */
+        /* Кнопки связи */
         .buttons-container {
             display: flex;
             flex-direction: column;
@@ -199,23 +179,26 @@
             border-radius: 14px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 1px;
             text-transform: uppercase;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
         }
 
         .btn-tg {
-            background-color: #4b8ca3;
-            color: #ffffff;
+            background-color: #f3eae1;
+            color: #3f5249;
+            border: 1px solid rgba(138, 111, 62, 0.25);
         }
-        .btn-tg:hover { background-color: #3b7387; transform: scale(1.02); }
+        .btn-tg:hover { background-color: #ebdccf; transform: translateY(-1px); }
 
         .btn-wa {
-            background-color: #559c6b;
-            color: #ffffff;
+            background-color: #e6edd9;
+            color: #364a3d;
+            border: 1px solid rgba(138, 111, 62, 0.25);
         }
-        .btn-wa:hover { background-color: #438056; transform: scale(1.02); }
+        .btn-wa:hover { background-color: #d7e4c5; transform: translateY(-1px); }
 
         .btn-phone {
             background-color: transparent;
@@ -225,51 +208,51 @@
         .btn-phone:hover {
             background-color: var(--gold-dark);
             color: #ffffff;
-            transform: scale(1.02);
+            transform: translateY(-1px);
         }
 
         .btn svg {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             margin-right: 10px;
             fill: currentColor;
         }
 
         /* --- Анимации --- */
-        @keyframes riseSmoke {
-            0% { transform: translate(-50%, 0) scale(0.7) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.5; }
-            60% { opacity: 0.3; }
-            100% { transform: translate(-50%, -700px) scale(1.6) rotate(20deg); opacity: 0; }
+        @keyframes gradientBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        @keyframes driftSparkles {
-            0% { transform: translateY(0) scale(0.5); opacity: 0; }
-            30% { opacity: 0.8; }
-            100% { transform: translateY(-100vh) translateX(30px) scale(1.3); opacity: 0; }
+        @keyframes borderMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
         }
 
-        /* Пульсирующее нежное свечение золотых граней */
-        @keyframes goldGlow {
-            0% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(223, 186, 107, 0.2); }
-            100% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 45px rgba(255, 243, 209, 0.5); }
+        @keyframes cardGlow {
+            0% { box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 15px rgba(223,186,107,0.2); }
+            100% { box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 35px rgba(255,245,214,0.5); }
+        }
+
+        @keyframes riseUp {
+            0% { transform: translateY(0) scale(0.6); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(20px) scale(1.2); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Эффекты заднего плана -->
-    <div class="smoke-bg">
-        <div class="smoke-cloud"></div>
-        <div class="smoke-cloud sc2"></div>
-        <div class="smoke-cloud sc3"></div>
-        <!-- Золотые крупицы света -->
-        <div class="sparkle" style="left: 15%; width: 5px; height: 5px; animation-duration: 7s;"></div>
-        <div class="sparkle" style="left: 45%; width: 3px; height: 3px; animation-duration: 10s; animation-delay: 2s;"></div>
-        <div class="sparkle" style="left: 75%; width: 6px; height: 6px; animation-duration: 8s; animation-delay: 4s;"></div>
+    <!-- Золотые крупицы света -->
+    <div class="sparks-container">
+        <div class="spark" style="left: 10%; width: 4px; height: 4px; animation-duration: 6s;"></div>
+        <div class="spark" style="left: 40%; width: 3px; height: 3px; animation-duration: 9s; animation-delay: 1s;"></div>
+        <div class="spark" style="left: 70%; width: 5px; height: 5px; animation-duration: 7s; animation-delay: 3s;"></div>
     </div>
 
-    <!-- Внешняя переливающаяся золотая рамка -->
+    <!-- Карточка в переливающейся рамке -->
     <div class="card-wrapper">
         <div class="container">
             
@@ -291,6 +274,11 @@
                 <li><span>✦</span> 6. Сам себе визажист / Обучение</li>
             </ul>
 
+            <!-- Кнопки связи -->
             <div class="buttons-container">
-                <!-- Telegram -->
                 <a href="https://t.me" target="_blank" class="btn btn-tg">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .24z"/></svg>
+                    Telegram
+                </a>
+
+                <a href="https://wa.me" target="_blank" class="btn btn-wa">
