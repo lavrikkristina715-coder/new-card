@@ -6,12 +6,13 @@
     <title>Abramova Brow | Бьюти-мастер Ася</title>
     <style>
         :root {
-            --bg-color: #0b0b0c;
-            --card-bg: #141416;
-            --accent-color: #e0b0ff; /* Сиреневый неон */
-            --accent-glow: rgba(224, 176, 255, 0.4);
-            --text-main: #ffffff;
-            --text-muted: #a1a1a5;
+            /* Нежная пастельная палитра */
+            --bg-start: #fbf5f3; /* Цвет взбитых сливок */
+            --bg-end: #ebdcd7;   /* Цвет пыльной розы */
+            --card-bg: rgba(255, 255, 255, 0.75); /* Полупрозрачный глянец */
+            --accent-color: #bfa399; /* Благородный кофейно-пастельный */
+            --text-main: #3a3230;
+            --text-muted: #7d706c;
             --border-radius: 24px;
         }
 
@@ -19,18 +20,65 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            -webkit-list-style: none;
         }
 
         body {
-            background-color: var(--bg-color);
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
             color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            background-image: radial-gradient(circle at 50% 10%, #20132b 0%, #0b0b0c 70%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Задний фон: Анимация дыма и золотых частиц */
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Слои дыма */
+        .smoke {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 70%);
+            transform: translateX(-50%);
+            opacity: 0;
+            filter: blur(40px);
+            animation: riseSmoke 9s infinite linear;
+        }
+        .smoke2 {
+            animation-delay: 3s;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(240,220,215,0.7) 0%, rgba(240,220,215,0) 70%);
+        }
+        .smoke3 {
+            animation-delay: 6s;
+            width: 700px;
+        }
+
+        /* Магические кружащиеся частицы */
+        .particle {
+            position: absolute;
+            bottom: -10px;
+            background: radial-gradient(circle, #f3e1d3 0%, rgba(255,215,0,0) 80%);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: riseParticles 7s infinite linear;
         }
 
         .container {
@@ -39,32 +87,31 @@
             background: var(--card-bg);
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(224, 176, 255, 0.05);
-            border: 1px solid #242427;
+            backdrop-filter: blur(20px); /* Эффект матового стекла */
+            box-shadow: 0 15px 35px rgba(163, 140, 133, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
             padding: 35px 25px;
             text-align: center;
+            z-index: 2;
             position: relative;
         }
 
-        /* Эффект мерцания логотипа */
         .logo-text {
-            font-size: 20px;
-            letter-spacing: 5px;
+            font-size: 19px;
+            letter-spacing: 6px;
             text-transform: uppercase;
             margin-bottom: 30px;
             color: var(--text-main);
             font-weight: 300;
-            border-bottom: 1px solid #242427;
+            border-bottom: 1px solid rgba(181, 159, 152, 0.2);
             padding-bottom: 15px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
-        /* Движение (пульсация) аватара */
+        /* Мягкое покачивание фото */
         .avatar-container {
             position: relative;
             width: 140px;
             height: 140px;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
             animation: float 4s ease-in-out infinite;
         }
 
@@ -73,30 +120,30 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent-color);
-            box-shadow: 0 0 20px var(--accent-glow);
+            border: 3px solid #ffffff;
+            box-shadow: 0 8px 25px rgba(181, 159, 152, 0.3);
         }
 
         .name {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 25px;
+            font-weight: 500;
             margin-bottom: 6px;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .sub-title {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--accent-color);
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
-            text-shadow: 0 0 8px var(--accent-glow);
+            letter-spacing: 4px;
+            margin-bottom: 35px;
+            font-weight: 600;
         }
 
         .services-title {
-            font-size: 14px;
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             color: var(--text-muted);
             margin-bottom: 15px;
             text-align: left;
@@ -104,35 +151,37 @@
         }
 
         .services-list {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 35px;
+            list-style: none !important;
+            padding: 0;
+            margin: 0 0 35px 0;
         }
 
-        /* Плавное движение пунктов при наведении */
         .services-list li {
-            background: #1a1a1e;
-            padding: 14px 16px;
-            border-radius: 12px;
+            list-style: none !important;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 15px 18px;
+            border-radius: 14px;
             margin-bottom: 10px;
             font-size: 14px;
-            border: 1px solid #242427;
+            border: 1px solid rgba(255, 255, 255, 0.8);
             border-left: 3px solid var(--accent-color);
             display: flex;
             align-items: center;
             transition: all 0.3s ease;
+            text-align: left;
+            color: #4a403d;
         }
 
         .services-list li:hover {
             transform: translateX(6px);
-            background: #202025;
-            box-shadow: 0 0 12px rgba(224, 176, 255, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 15px rgba(181, 159, 152, 0.1);
         }
 
         .services-list li span {
             margin-right: 12px;
             color: var(--accent-color);
-            text-shadow: 0 0 5px var(--accent-glow);
+            font-size: 15px;
         }
 
         .buttons-container {
@@ -141,7 +190,6 @@
             gap: 14px;
         }
 
-        /* Общие стили кнопок и их свечение */
         .btn {
             display: flex;
             align-items: center;
@@ -153,45 +201,39 @@
             font-size: 15px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
         }
 
-        /* Анимация пульсации для кнопок связи */
         .btn-tg {
-            background-color: #229ED9;
+            background-color: #54a9d6;
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(34, 158, 217, 0.2);
+            box-shadow: 0 4px 15px rgba(84, 169, 214, 0.2);
         }
         .btn-tg:hover {
-            background-color: #28a7e3;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(34, 158, 217, 0.4);
+            box-shadow: 0 6px 20px rgba(84, 169, 214, 0.35);
         }
 
         .btn-wa {
-            background-color: #25D366;
+            background-color: #5cc884;
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+            box-shadow: 0 4px 15px rgba(92, 200, 132, 0.2);
         }
         .btn-wa:hover {
-            background-color: #2bd96f;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 6px 20px rgba(92, 200, 132, 0.35);
         }
 
-        /* Неоновая кнопка звонка */
         .btn-phone {
             background-color: transparent;
-            color: var(--accent-color);
-            border: 1px solid var(--accent-color);
-            box-shadow: 0 0 10px rgba(224, 176, 255, 0.1);
+            color: #7d706c;
+            border: 1.5px solid #b59f98;
+            box-shadow: 0 4px 10px rgba(181, 159, 152, 0.05);
         }
         .btn-phone:hover {
-            background-color: var(--accent-color);
-            color: #121212;
+            background-color: #b59f98;
+            color: #ffffff;
             transform: translateY(-2px);
-            box-shadow: 0 0 20px var(--accent-color);
+            box-shadow: 0 6px 15px rgba(181, 159, 152, 0.3);
         }
 
         .btn svg {
@@ -201,15 +243,41 @@
             fill: currentColor;
         }
 
-        /* Анимации движения */
+        /* Новые анимации эффектов */
+        @keyframes riseSmoke {
+            0% { transform: translate(-50%, 0) scale(0.8); opacity: 0; }
+            15% { opacity: 0.4; }
+            50% { opacity: 0.2; }
+            100% { transform: translate(-50%, -600px) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes riseParticles {
+            0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(50px) scale(1.2); opacity: 0; }
+        }
+
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-6px); }
             100% { transform: translateY(0px); }
         }
     </style>
 </head>
 <body>
+
+    <!-- Эффекты заднего фона -->
+    <div class="background-effects">
+        <div class="smoke"></div>
+        <div class="smoke smoke2"></div>
+        <div class="smoke smoke3"></div>
+        <!-- Крупицы -->
+        <div class="particle" style="left: 10%; width: 6px; height: 6px; animation-duration: 6s;"></div>
+        <div class="particle" style="left: 30%; width: 4px; height: 4px; animation-duration: 8s; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 55%; width: 8px; height: 8px; animation-duration: 7s; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 80%; width: 5px; height: 5px; animation-duration: 9s; animation-delay: 3s;"></div>
+    </div>
 
     <div class="container">
         <div class="logo-text">ABRAMOVA BROW</div>
@@ -232,25 +300,4 @@
         </ul>
 
         <div class="buttons-container">
-            <!-- Кнопка Telegram -->
             <a href="https://t.me" target="_blank" class="btn btn-tg">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .24z"/></svg>
-                Telegram
-            </a>
-
-            <!-- Кнопка WhatsApp -->
-            <a href="https://wa.me" target="_blank" class="btn btn-wa">
-                <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.717-1.454L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.41 1.449 5.428 0 9.847-4.415 9.85-9.847.002-2.63-1.023-5.101-2.886-6.968-1.862-1.866-4.335-2.894-6.97-2.896-5.43 0-9.848 4.416-9.852 9.849-.001 2.193.572 4.333 1.66 6.197L2.837 21.19l4.164-1.091zm12.163-5.233c-.324-.162-1.92-.949-2.217-1.057-.297-.108-.513-.162-.73.162-.216.324-.837 1.058-1.026 1.274-.19.216-.379.243-.703.081-.324-.162-1.368-.505-2.607-1.611-.963-.859-1.613-1.921-1.802-2.246-.19-.324-.02-.5-.181-.661-.146-.146-.324-.379-.486-.568-.162-.189-.216-.324-.324-.541-.108-.216-.054-.405-.027-.567.027-.162.216-.513.324-.676.108-.162.144-.27.216-.405.072-.135.036-.253-.018-.365-.054-.112-.513-1.236-.703-1.691-.185-.444-.372-.383-.513-.39l-.438-.007c-.152 0-.399.057-.608.286-.209.229-.797.778-.797 1.898 0 1.12.814 2.2 1.03 2.493.216.293 1.603 2.448 3.885 3.434.543.234.967.373 1.297.478.545.173 1.04.149 1.431.09.436-.066 1.344-.54 1.533-1.06.189-.519.189-.965.132-1.058-.057-.093-.216-.162-.54-.324z"/></svg>
-                WhatsApp
-            </a>
-
-            <!-- Кнопка Позвонить -->
-            <a href="tel:+79015710088" class="btn btn-phone">
-                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                Позвонить
-            </a>
-        </div>
-    </div>
-
-</body>
-</html>
