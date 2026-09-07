@@ -8,7 +8,7 @@
         :root {
             --text-main: #2c2523;
             --text-muted: #6b5e5a;
-            --gold-light: #fff5d6;
+            --gold-light: #fff6da;
             --gold-main: #dfba6b;
             --gold-dark: #8a6f3e;
         }
@@ -21,73 +21,73 @@
         }
 
         body {
-            background-color: #0b0f09;
+            background-color: #050804;
             color: var(--text-main);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Разрешаем скролл на мобильных */
             min-height: 100vh;
-            padding: 20px;
+            padding: 25px 15px;
             position: relative;
-            overflow: hidden;
-            /* Живой переливающийся премиум-фон */
-            background: linear-gradient(135deg, #070d05 0%, #142010 50%, #050804 100%);
-            background-size: 400% 400%;
-            animation: gradientBg 12s ease infinite;
+            overflow-x: hidden;
+            /* Глубокий темный фон вокруг карточки */
+            background-image: radial-gradient(circle at 50% 30%, #111a0d 0%, #030502 80%);
         }
 
-        /* Золотые мерцающие частицы на фоне */
-        .sparks-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        /* Эффект яркого пробивающегося света сверху (как на референсе) */
+        .top-light-effect {
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(255, 246, 218, 0.45) 0%, rgba(223, 186, 107, 0.15) 50%, rgba(0,0,0,0) 70%);
             z-index: 1;
             pointer-events: none;
+            animation: lightPulse 5s ease-in-out infinite alternate;
         }
 
-        .spark {
-            position: absolute;
-            bottom: -20px;
-            background: radial-gradient(circle, var(--gold-light) 0%, rgba(223,186,107,0) 70%);
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: riseUp 8s infinite linear;
-        }
-
-        /* Карточка с эффектом переливающегося золотого свечения */
+        /* Усиленная, яркая переливающаяся золотая обводка */
         .card-wrapper {
             position: relative;
             z-index: 2;
             width: 100%;
             max-width: 400px;
-            padding: 3px; 
-            border-radius: 30px;
-            background: linear-gradient(135deg, var(--gold-main), var(--gold-dark), var(--gold-light), var(--gold-main));
-            background-size: 300% 300%;
-            animation: borderMove 4s linear infinite, cardGlow 3s ease-in-out infinite alternate;
+            padding: 4px; /* Толщина рамки */
+            border-radius: 32px;
+            background: linear-gradient(135deg, var(--gold-main), #fff, var(--gold-dark), var(--gold-light), var(--gold-main));
+            background-size: 400% 400%;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(223, 186, 107, 0.35);
+            animation: borderGleam 6s linear infinite, borderGlow 3s ease-in-out infinite alternate;
         }
 
+        /* Внутреннее содержимое с текстурой светлого мрамора */
         .container {
             width: 100%;
-            background: linear-gradient(180deg, #fefcf7 0%, #f7f1e6 100%);
-            border-radius: 27px;
-            padding: 35px 20px;
+            border-radius: 28px;
+            padding: 45px 22px;
             text-align: center;
-            box-shadow: inset 0 0 15px rgba(223, 186, 107, 0.1);
+            position: relative;
+            background-color: #f6f1e7;
+            /* Имитация прожилок благородного мрамора */
+            background-image: 
+                linear-gradient(30deg, rgba(215,195,175,0.15) 1px, transparent 1px),
+                linear-gradient(125deg, rgba(190,170,145,0.1) 2px, transparent 2px),
+                linear-gradient(180deg, #fbfaf6 0%, #f4eee2 100%);
+            box-shadow: inset 0 0 20px rgba(223, 186, 107, 0.15);
         }
 
-        /* Фото в золотом ореоле */
+        /* Фото в двойном золотом кольце */
         .avatar-container {
-            width: 125px;
-            height: 125px;
-            margin: 0 auto 15px;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 18px;
             position: relative;
             padding: 3px;
-            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark), var(--gold-main));
             border-radius: 50%;
-            box-shadow: 0 8px 20px rgba(138, 111, 62, 0.25);
+            box-shadow: 0 10px 25px rgba(138, 111, 62, 0.3);
         }
 
         .avatar {
@@ -96,14 +96,16 @@
             border-radius: 50%;
             object-fit: cover;
             display: block;
+            border: 2px solid #fff;
         }
 
         .name {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 400;
             margin-bottom: 2px;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             color: #1a1514;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.8);
         }
 
         .sub-title {
@@ -111,23 +113,32 @@
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 5px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-weight: bold;
         }
 
-        .heart-divider {
-            color: var(--gold-dark);
-            font-size: 10px;
-            margin-bottom: 25px;
-            opacity: 0.7;
+        /* Изящная золотая веточка из референса */
+        .twig-divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            opacity: 0.85;
+        }
+
+        .twig-divider svg {
+            width: 55px;
+            height: auto;
+            fill: var(--gold-dark);
+            filter: drop-shadow(0 1px 1px rgba(255,255,255,0.5));
         }
 
         .services-title {
             font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             color: var(--text-muted);
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             text-align: left;
             padding-left: 5px;
             font-weight: bold;
@@ -136,69 +147,73 @@
         .services-list {
             list-style: none;
             padding: 0;
-            margin: 0 0 30px 0;
+            margin: 0 0 35px 0;
         }
 
+        /* Объемные аккуратные плашки услуг */
         .services-list li {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 14px 16px;
-            border-radius: 14px;
-            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.88);
+            padding: 16px 18px;
+            border-radius: 16px;
+            margin-bottom: 12px;
             font-size: 14px;
-            border: 1px solid rgba(223, 186, 107, 0.2);
+            border: 1px solid rgba(223, 186, 107, 0.25);
             display: flex;
             align-items: center;
             text-align: left;
             color: var(--text-main);
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(138, 111, 62, 0.05);
+            transition: all 0.3s ease;
         }
 
         .services-list li:hover {
-            transform: translateX(4px);
+            transform: translateY(-1px);
             border-color: var(--gold-main);
+            background: #ffffff;
+            box-shadow: 0 6px 15px rgba(223, 186, 107, 0.15);
         }
 
         .services-list li span {
-            margin-right: 10px;
+            margin-right: 12px;
             color: var(--gold-dark);
             font-size: 11px;
         }
 
-        /* Кнопки связи */
+        /* Контейнер кнопок */
         .buttons-container {
             display: flex;
             flex-direction: column;
             gap: 12px;
+            margin-top: 15px;
         }
 
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px;
-            border-radius: 14px;
+            padding: 16px;
+            border-radius: 15px;
             text-decoration: none;
             font-weight: bold;
             font-size: 13px;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid rgba(138, 111, 62, 0.2);
         }
 
         .btn-tg {
             background-color: #f3eae1;
-            color: #3f5249;
-            border: 1px solid rgba(138, 111, 62, 0.25);
+            color: #43524a;
         }
-        .btn-tg:hover { background-color: #ebdccf; transform: translateY(-1px); }
+        .btn-tg:hover { background-color: #ebd9c5; transform: scale(1.01); }
 
         .btn-wa {
             background-color: #e6edd9;
-            color: #364a3d;
-            border: 1px solid rgba(138, 111, 62, 0.25);
+            color: #3b4d41;
         }
-        .btn-wa:hover { background-color: #d7e4c5; transform: translateY(-1px); }
+        .btn-wa:hover { background-color: #d7e4c5; transform: scale(1.01); }
 
         .btn-phone {
             background-color: transparent;
@@ -208,7 +223,7 @@
         .btn-phone:hover {
             background-color: var(--gold-dark);
             color: #ffffff;
-            transform: translateY(-1px);
+            transform: scale(1.01);
         }
 
         .btn svg {
@@ -219,40 +234,28 @@
         }
 
         /* --- Анимации --- */
-        @keyframes gradientBg {
+        @keyframes borderGleam {
             0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
         }
 
-        @keyframes borderMove {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 300% 50%; }
+        @keyframes borderGlow {
+            0% { box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 25px rgba(223, 186, 107, 0.3); }
+            100% { box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 45px rgba(255, 246, 218, 0.65); }
         }
 
-        @keyframes cardGlow {
-            0% { box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 15px rgba(223,186,107,0.2); }
-            100% { box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 35px rgba(255,245,214,0.5); }
-        }
-
-        @keyframes riseUp {
-            0% { transform: translateY(0) scale(0.6); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.3; }
-            100% { transform: translateY(-100vh) translateX(20px) scale(1.2); opacity: 0; }
+        @keyframes lightPulse {
+            0% { opacity: 0.8; height: 350px; }
+            100% { opacity: 1; height: 380px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Золотые крупицы света -->
-    <div class="sparks-container">
-        <div class="spark" style="left: 10%; width: 4px; height: 4px; animation-duration: 6s;"></div>
-        <div class="spark" style="left: 40%; width: 3px; height: 3px; animation-duration: 9s; animation-delay: 1s;"></div>
-        <div class="spark" style="left: 70%; width: 5px; height: 5px; animation-duration: 7s; animation-delay: 3s;"></div>
-    </div>
+    <!-- Эффект верхнего пробивающегося света -->
+    <div class="top-light-effect"></div>
 
-    <!-- Карточка в переливающейся рамке -->
+    <!-- Карточка в переливающейся яркой рамке -->
     <div class="card-wrapper">
         <div class="container">
             
@@ -262,7 +265,13 @@
 
             <div class="name">Asya</div>
             <div class="sub-title">Beauty Master</div>
-            <div class="heart-divider">♥</div>
+            
+            <!-- Золотая веточка вместо сердечка -->
+            <div class="twig-divider">
+                <svg viewBox="0 0 100 30">
+                    <path d="M10,15 Q30,12 50,15 T90,15 M30,14 Q25,8 20,12 Q26,15 30,14 M42,14 Q40,6 34,9 Q38,15 42,14 M56,15 Q60,7 66,11 Q61,16 56,15 M70,15 Q76,9 81,13 Q76,17 70,15 M25,15 Q30,22 35,18 Q31,14 25,15 M48,15 Q54,23 59,19 Q54,15 48,15 M64,15 Q68,22 74,18 Q69,14 64,15" stroke="#8a6f3e" stroke-width="1.5" fill="#dfba6b" stroke-linecap="round"/>
+                </svg>
+            </div>
 
             <div class="services-title">Услуги:</div>
             <ul class="services-list">
@@ -277,8 +286,3 @@
             <!-- Кнопки связи -->
             <div class="buttons-container">
                 <a href="https://t.me" target="_blank" class="btn btn-tg">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .24z"/></svg>
-                    Telegram
-                </a>
-
-                <a href="https://wa.me" target="_blank" class="btn btn-wa">
